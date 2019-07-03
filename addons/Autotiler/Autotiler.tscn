@@ -1,0 +1,86 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://addons/Autotiler/Autotiler.gd" type="Script" id=1]
+[ext_resource path="res://addons/Autotiler/example.png" type="Texture" id=2]
+
+[node name="Autotiler" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1.13202
+margin_right = -830.868
+margin_bottom = -200.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 1 )
+example = ExtResource( 2 )
+
+[node name="Container" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Container"]
+margin_right = 192.0
+margin_bottom = 31.0
+size_flags_vertical = 1
+text = "Autotiler by 
+Benedikt Wicklein"
+align = 1
+valign = 1
+
+[node name="Load" type="Button" parent="Container"]
+margin_top = 35.0
+margin_right = 192.0
+margin_bottom = 85.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Load File"
+
+[node name="Texture" type="TextureRect" parent="Container"]
+margin_top = 89.0
+margin_right = 192.0
+margin_bottom = 345.0
+rect_min_size = Vector2( 192, 256 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 2 )
+stretch_mode = 6
+
+[node name="Convert" type="Button" parent="Container"]
+margin_top = 349.0
+margin_right = 192.0
+margin_bottom = 400.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Convert & Save"
+
+[node name="Load_Dialog" type="FileDialog" parent="."]
+margin_right = 416.0
+margin_bottom = 184.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+window_title = "Open"
+resizable = true
+mode = 0
+filters = PoolStringArray( "*.png", "*.jpg", "*.bmp" )
+
+[node name="Save_Dialog" type="FileDialog" parent="."]
+margin_top = 35.0
+margin_right = 416.0
+margin_bottom = 347.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+window_title = "Save"
+resizable = true
+filters = PoolStringArray( "*.png" )
+
+[node name="Fail" type="AcceptDialog" parent="."]
+margin_right = 115.0
+margin_bottom = 58.0
+window_title = "Warning"
+dialog_text = "Wrong format :("
+[connection signal="pressed" from="Container/Load" to="." method="_on_Load_pressed"]
+[connection signal="pressed" from="Container/Convert" to="." method="_on_Convert_pressed"]
+[connection signal="file_selected" from="Load_Dialog" to="." method="_on_Load_Dialog_file_selected"]
+[connection signal="file_selected" from="Save_Dialog" to="." method="_on_Save_Dialog_file_selected"]
